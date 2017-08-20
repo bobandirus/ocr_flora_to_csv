@@ -1,5 +1,5 @@
 /**
- * Created by sb823249 on 30/03/2015.
+ * Created by sb823249 on 31/03/2015.
  */
 
 import java.io.*;
@@ -14,185 +14,80 @@ import java.util.regex.Pattern;
 public class main {
     static String[] bits = new String[0];
     static String[] tableHeadings = new String[0];
-    static String fileName = "";
-    static String lineToAdd = "";
-    static boolean familyCount = true;
-    static boolean genusCount = true;
-    static boolean speciesCount = true;
     static String[] building = new String[0];
-    static File mainText = new File("");
-    static int numberOfBits = 0;
-    static int trigger = 0;
     static String lineEr = "";
+    static int numberOfBits = 0;
     static String[] moreStuff = new String[0];
-    static String toUse = "";
-    static String[] things = new String[0];
-    //static List<String> someBits = new List<String>();
-    //static int z = 0;
+    static String lineToAdd = "";
 
-    /*public static void main(String[] args) throws IOException{
-        //for (int z = 0; z < 9; z++){
-            //initialSplit();
-        //}
-        int x = 0;
-        char newLine = \r;
-        BufferedReader reader = new BufferedReader(new FileReader("" + System.getProperty("user.dir") + "\\stace text mk1.txt"));
-        String bigLine = null;
-        while ((bigLine = reader.readLine()) != null){
-            for (int i = 0; i < bigLine.length(); i++){
-
-            }
-        }
-
-        //String alltext = Files.read("" + System.getProperty("user.dir") + "\\stace text mk1.txt");
-
-        //
-        //this for is in the wrong place
-        //
-        for (int z = 0; z < 2; z++) {
-            Scanner scanner = new Scanner(new File("" + System.getProperty("user.dir") + "\\stace text mk1.txt"));
-            scanner.useDelimiter("\r");
-            ArrayList<String> someBits = new ArrayList<String>();
-            while (scanner.hasNext()) {
-                String line = scanner.next();
-                someBits.add(line);
-            }
-            building = someBits.toArray(building);
-            readDescription();
-        }
-        writeFile();
-    }*/
-    public static void main(String[] args) throws IOException{
-        //fileName = "" + System.getProperty("user.dir") + "\\test.txt";
-        Scanner scanner = new Scanner(new File("" + System.getProperty("user.dir") + "\\test.txt"));
-        //Scanner scanner = new Scanner(fileName.);
-
+    public static void main(String[] args) throws IOException {
+        Scanner scanner = new Scanner(new File("" + System.getProperty("user.dir") + "\\stace text mk1.txt"));
         scanner.useDelimiter("\r\n||\n||\r");
-        scanner.useDelimiter(System.lineSeparator());
+        //scanner.useDelimiter(System.lineSeparator());
         ArrayList<String> someBits = new ArrayList<String>();
-        //numberOfBits = someBits.size();
-        while (scanner.hasNext()){
+        while (scanner.hasNext()) {
             String line = scanner.nextLine();
             someBits.add(line);
-            //System.out.print(line + "\n");
         }
         building = someBits.toArray(building);
         lineEr = Arrays.toString(building);
-        //System.out.print(Arrays.toString(building) + "\n");
+        //lineEr = lineEr.replace("\\p{C}", "");
+        //lineEr = lineEr.replace("[^a-zA-Z0-9")
         numberOfBits = building.length;
         gogogo();
     }
-    /*public static void main(String[] args) throws IOException{
-       char newLine = System.lineSeparator(new File("" + System.getProperty("user.dir") + "\\test.txt"));
-    }*/
 
-    //
-    //
-    //
-    //
-    //THIS WAS ALMOST RIGHT - but it cycled through everything, instead of each section
-    //
-    //
-    //
-
-
-
-    /*public static void gogogo() throws IOException{
-        for (int t = 0; t < numberOfBits; t++){
-            readDescription();
+    public static void gogogo() throws IOException {
+        //moreStuff = lineEr.split("[0-9]\\. [A-Z]");
+        moreStuff = lineEr.split("(?=[0-9]\\. [A-Z])");
+        //System.out.print(Arrays.toString(moreStuff));
+        for (int e = 0; e < moreStuff.length; e++){
+            System.out.print(moreStuff[e] + "\n");
+            String thePart = moreStuff[e];
+            readDescription(thePart);
         }
-        writeFile();
-    }*/
-
-    public static void gogogo() throws IOException{
-        //String[][] arraySet = new String[0][0];
-        //for (int t = 0; t < numberOfBits; t++){
-        //arraySet[t][] = building.s
-        //}
-        moreStuff = lineEr.split("[0-9]\\. [A-Z]");
         for (int b = 0; b < moreStuff.length; b++) {
-            //toUse = moreStuff[b];
-            readDescription();
+            //readDescription();
         }
         writeFile();
     }
 
-    /*public static void initialSplit() throws IOException{
-        fileName = "" + System.getProperty("user.dir") + "\\stace text mk1.txt";
-        String words = fileName;
-        words = words.replace("\r", "");
-        //List<String> = words.split();
-        //List<String> staceText = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8);
-        //List<String> staceText = Files.readAllBytes(Paths.get(fileName), StandardCharsets.UTF_8);
-        //String[] splittingPt1 = new String[staceText.size()];
-        //splittingPt1 = staceText.toArray(splittingPt1);
-        //String[] splittingPt1 = new String[];
-        //splittingPt1 =
-        //splittingPt1 = splittingPt1.
-        //for (int c = 0; c < splittingPt1.length; c++){
-        //    building = staceText.get(c).split("[0-9]\\. [A-Z]");
-        //}
-        building = words.split("[0-9]\\. [A-Z]");
-        readDescription();
-    }*/
-
-    /*public static void initialSplit() throws IOException{
-        mainText = new File("" + System.getProperty("user.dir") + "\\stace text mk1.txt");
-        String words = mainText.reatoString();
-        building = words.split("[0-9]\\. [A-Z]");
-    }*/
-
-    /*public static void initialSplit() throws IOException{
-        Scanner scanner = new Scanner(new File("" + System.getProperty("user.dir") + "\\stace text mk1.txt"));
-        scanner.useDelimiter("\r");
-        ArrayList<String> someBits = new ArrayList<String>();
-        while (scanner.hasNext()){
-            String line = scanner.next();
-            someBits.add(line);
-        }
-        building = someBits.toArray(building);
-        readDescription();
-    }*/
-
-    /*public static void initialSplit() throws IOException{
-        String text = readFileAsS
-    }*/
-
-    public static void readDescription() throws IOException{
-        //trigger++;
-        //ArrayList<String> bitsAdder = new ArrayList<String>();
-        List<String> someBits = Arrays.asList(moreStuff);
-        //things = toUse.split()
-        for (int b = 0; b < someBits.size(); b++) {
-            //Stri
-            String[] preBitsOne = someBits.get(b).split(";");
-            ArrayList<String> bitsAdder = new ArrayList<String>();
-            for (int r = 0; r < preBitsOne.length; r++) {
-                Pattern familyName = Pattern.compile("\\. \\.*ACEAE");
-                Pattern genusName = Pattern.compile("\\. [A-Z][A-Z][A-Z][A-Z][A-Z]");
-                Pattern speciesName = Pattern.compile("\\. [A-Z]\\. [a-z]");
-                Matcher familyPattern = familyName.matcher(preBitsOne[b]);
-                Matcher genusPattern = genusName.matcher(preBitsOne[b]);
-                Matcher speciesPattern = speciesName.matcher(preBitsOne[b]);
-                if (familyPattern.find()) {
-                    bitsAdder.add(preBitsOne[b]);
-                } else if (genusPattern.find()) {
-                    bitsAdder.add(preBitsOne[b]);
-                } else if (speciesPattern.find()) {
-                    bitsAdder.add(preBitsOne[b]);
-                } else {
-                    String[] addToAdder = preBitsOne[b].split("\\.");
-                    for (int q = 0; q < addToAdder.length; q++) {
-                        String addingToAdder = addToAdder[r];
-                        bitsAdder.add(addingToAdder);
-                    }
+    public static void readDescription(String thePart) throws IOException {
+        //List<String> someBits = Arrays.asList(moreStuff);
+        //System.out.print(Arrays.toString(someBits));
+        //for (int q = 0; q < someBits.size(); q++) {
+        //String[] preBitsOne = someBits.get(q).split(";");
+        String[] preBitsOne = thePart.split(";");
+        ArrayList<String> bitsAdder = new ArrayList<String>();
+        for (int b = 0; b < preBitsOne.length; b++) {
+            Pattern familyName = Pattern.compile("\\. \\.*ACEAE");
+            Pattern genusName = Pattern.compile("\\. [A-Z][A-Z][A-Z][A-Z][A-Z]");
+            Pattern speciesName = Pattern.compile("\\. [A-Z]\\. [a-z]");
+            Matcher familyPattern = familyName.matcher(preBitsOne[b]);
+            Matcher genusPattern = genusName.matcher(preBitsOne[b]);
+            Matcher speciesPattern = speciesName.matcher(preBitsOne[b]);
+            if (familyPattern.find()) {
+                bitsAdder.add(preBitsOne[b]);
+            } else if (genusPattern.find()) {
+                bitsAdder.add(preBitsOne[b]);
+            } else if (speciesPattern.find()) {
+                bitsAdder.add(preBitsOne[b]);
+            } else {
+                String[] addToAdder = preBitsOne[b].split("\\.");
+                for (int y = 0; y < addToAdder.length; y++) {
+                    String addingToAdder = addToAdder[y];
+                    bitsAdder.add(addingToAdder);
                 }
             }
-            bits = bitsAdder.toArray(bits);
-            for (int q = 0; q < bits.length; q++) {
-                //System.out.print(bits[q] + "\n");
-            }
         }
+        //bitsAdder = bitsAdder.remove("]");
+        //System.out.print(bitsAdder + "\n");
+        bits = bitsAdder.toArray(bits);
+        for (int n = 0; n < bits.length; n++) {
+            //System.out.print(bits[q] + "\n");
+            //bits[n] = bits[n].replace("]", "");
+        }
+
         readHeadings();
     }
 
@@ -203,6 +98,7 @@ public class main {
         }
         compareEntries();
     }
+
     public static void compareEntries() throws IOException {
         Boolean speciesFirst = true;
         Boolean genusFirst = true;
@@ -228,6 +124,13 @@ public class main {
             }
             bitsChecker:
             for (int b = 0; b < bits.length; b++) {
+                //I don't like this. It seems like a useless hack, but I can't work
+                //out why its needed. At some points, bits[b] is null, and I can't
+                //figure out why
+                if (bits[b] == null){
+                    break bitsChecker;
+                }
+                //CANT REMOVE COMMAS FROM NOTHING
                 bits[b] = bits[b].replace(",", "");
                 Boolean familyFound = false;
                 Boolean genusFound = false;
@@ -279,7 +182,7 @@ public class main {
                         break bitsChecker;
                     } else {
                         line[c] = "no";
-                        System.out.print("Column missing for " + bits[b] + "\n");
+                        //System.out.print("Column missing for " + bits[b] + "\n");
                     }
                     if (added = false) {
                         if (line[c] != "yes") {
@@ -306,9 +209,6 @@ public class main {
         String dataB = dataA.replace("]", "");
         lineToAdd = lineToAdd + dataB + "\n";
         bits = new String[0];
-        //if (trigger == numberOfBits){
-        //    writeFile();
-        //}
     }
 
     public static void writeFile() throws IOException {
@@ -322,3 +222,6 @@ public class main {
         writer.close();
     }
 }
+
+
+
